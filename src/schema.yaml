@@ -41,7 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/SuccessfulSubmission'
         '400':
           description: 'Bad request'
           content:
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/ErroredSubmission'
         default:
           description: 'Unexpected error'
           content:
@@ -325,6 +325,27 @@ components:
           type: string
         createdAt:
           type: string
+    SuccessfulSubmission:
+      type: object
+      required:
+        - status
+
+      properties:
+        status:
+          type: string
+          enum: [ok]
+    ErroredSubmission:
+      type: object
+      required:
+        - status
+        - errors
+      properties:
+        status:
+          type: string
+          enum: [error]
+        errors:
+          type: array
+          items: {} # any type.
     Error:
       type: object
       required:

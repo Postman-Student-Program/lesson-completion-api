@@ -17,6 +17,7 @@
   "author": "claire.froelich@postman.com",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.1",
     "dotenv": "^16.0.0",
     "fastify": "^3.27.4",
     "fastify-openapi-glue": "^2.6.6",
@@ -24,6 +25,7 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/jest": "^27.4.1",
     "@types/knex": "^0.16.1",
     "nodemon": "^2.0.15",
