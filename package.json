@@ -1,0 +1,35 @@
+{
+  "name": "lesson-completion-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "yarn clean && tsc -p tsconfig.build.json && yarn copy-spec",
+    "start": "node dist/server.js",
+    "dev": "nodemon",
+    "clean": "rm -fr dist",
+    "test": "npm run db:test:pristine && NODE_ENV=test jest",
+    "test:watch": "npm run db:test:pristine && NODE_ENV=test jest --watch",
+    "psql": "psql -U lesson_comp_dev lesson_comp_api_dev",
+    "db:init": "psql postgres -f ./src/db/sql/init.sql"
+  },
+  "keywords": [],
+  "author": "claire.froelich@postman.com",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "fastify": "^3.27.4",
+    "fastify-openapi-glue": "^2.6.6",
+    "knex": "^1.0.4",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.4.1",
+    "@types/knex": "^0.16.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.1",
+    "ts-jest": "^27.1.4",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}

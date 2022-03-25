@@ -1,0 +1,342 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Skilljar Lesson Completion API'
+  license:
+    name: MIT
+servers:
+  - url: 'localhost:3000'
+paths:
+  /:
+    get:
+      operationId: healthcheck
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+  /submit:
+    post:
+      summary: 'Submit a Postman collection to complete a Skilljar lesson'
+      operationId: submit
+      tags:
+        - student
+      security: [] # No security
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitInput'
+      responses:
+        '200':
+          description: 'Submission successful'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '424':
+          description: 'Postman tests failed'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /admin/test_registrations:
+    get:
+      summary: 'Get test registrations'
+      operationId: getTestRegistrations
+      tags:
+        - admin
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: name
+          in: query
+          description: 'a search term to %LIKE% match test registration name'
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Success'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TestRegistration'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 'Test registration not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      summary: 'Add a test registration'
+      operationId: createTestRegistration
+      tags:
+        - admin
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTestRegistrationInput'
+      responses:
+        '201':
+          description: 'Test Registration created successfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRegistration'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /admin/test_registrations/{id}:
+    get:
+      summary: 'Update a test registration'
+      operationId: updateTestRegistration
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/StringId'
+      responses:
+        '200':
+          description: 'Test registration updated successfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRegistration'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '400':
+          description: 'Bad request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 'Test registration not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      summary: 'Update a test registration'
+      operationId: updateTestRegistration
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/StringId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTestRegistrationInput'
+      responses:
+        '200':
+          description: 'Test registration updated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestRegistration'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 'Test registration not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: 'Delete a test registration'
+      operationId: deleteTestRegistration
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/StringId'
+      responses:
+        '204':
+          description: 'Test registration deleted'
+        '401':
+          description: 'Unauthorized'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: 'Test registration not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: 'Unexpected error'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  parameters:
+    StringId:
+      name: id
+      in: path
+      description: id of an entity
+      required: true
+      schema:
+        type: string
+  schemas:
+    SubmitInput:
+      type: object
+      required:
+        - email
+        - postman_collection_json_url
+        - published_course_id
+        - lesson_id
+      properties:
+        email:
+          type: string
+        postman_collection_json_url:
+          type: string
+        published_course_id:
+          type: string
+        lesson_id:
+          type: string
+    CreateTestRegistrationInput:
+      type: object
+      required:
+        - name
+        - postman_test_collection_json_url
+        - published_course_id
+        - lesson_id
+      properties:
+        name:
+          type: string
+        postman_test_collection_json_url:
+          type: string
+        published_course_id:
+          type: string
+        lesson_id:
+          type: string
+    UpdateTestRegistrationInput:
+      type: object
+      anyOf:
+        - required: [name]
+        - required: [postman_test_collection_json_url]
+        - required: [published_course_id]
+        - required: [lesson_id]
+      properties:
+        name:
+          type: string
+        postman_test_collection_json_url:
+          type: string
+        published_course_id:
+          type: string
+        lesson_id:
+          type: string
+    TestRegistration:
+      type: object
+      required:
+        - id
+        - postman_test_collection_json_url
+        - createdAt
+      properties:
+        id:
+          type: string
+        postman_test_collection_json_url:
+          type: string
+        name:
+          type: string
+        createdAt:
+          type: string
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+        errors:
+          type: array
+          items: {} # any type. This property supplied in case of request validation errors
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api-key
