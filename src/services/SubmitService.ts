@@ -65,6 +65,7 @@ class SubmitService {
       lessonId
     })
 
+    /** Lesson succesfully updated as complete in Skilljar. */
     const message = `Congratulations! The lesson '${skilljarRes.lesson.title}' is now marked as complete.`
     return { status: 'ok', message }
   }
