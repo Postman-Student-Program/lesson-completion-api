@@ -58,6 +58,14 @@ class RouteHandler {
       await testRegistrationsService.updateTestRegistration(params, input)
     return res.send(testRegistration)
   }
+
+  deleteTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
+    // TODO: AUTH
+    const rawParams = req.params as StringIdParams
+    const params = getTestRegistrationParamsFromId(rawParams.id)
+    await testRegistrationsService.deleteTestRegistration(params)
+    return res.code(204).send()
+  }
 }
 
 export default RouteHandler

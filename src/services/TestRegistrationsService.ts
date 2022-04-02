@@ -56,6 +56,12 @@ class TestRegistrationsService {
       filteredInput
     )
   }
+
+  deleteTestRegistration = async (params: TestRegistrationIdParams) => {
+    await ensureTestRegistrationExists(params, this.testRegistrationsDal)
+
+    return this.testRegistrationsDal.deleteTestRegistration(params)
+  }
 }
 
 export default TestRegistrationsService

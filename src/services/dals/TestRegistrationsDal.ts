@@ -55,6 +55,15 @@ class TestRegistrationsDal {
       .returning('*')
       .then((r: TestRegistration[]) => r[0]) // return one
   }
+
+  deleteTestRegistration = async (params: TestRegistrationIdParams) => {
+    return this.db('test_registrations')
+      .del()
+      .where(params)
+      .then((_r: any) => {
+        return
+      })
+  }
 }
 
 export default TestRegistrationsDal
