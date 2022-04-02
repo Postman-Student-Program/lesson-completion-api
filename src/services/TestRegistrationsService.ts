@@ -41,7 +41,6 @@ class TestRegistrationsService {
     params: TestRegistrationIdParams,
     input: UpdateTestRegistrationInput
   ) => {
-    // TODO: AUTH
     const testRegistration = await ensureTestRegistrationExists(
       params,
       this.testRegistrationsDal

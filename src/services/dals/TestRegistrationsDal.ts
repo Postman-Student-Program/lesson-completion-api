@@ -44,6 +44,7 @@ class TestRegistrationsDal {
         }
       })
   }
+
   updateTestRegistration = async (
     params: TestRegistrationIdParams,
     input: UpdateTestRegistrationInput
