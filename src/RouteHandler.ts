@@ -41,11 +41,21 @@ class RouteHandler {
 
   getTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
     // TODO: AUTH
-    const rawParams = req.params as GetTestRegistrationParamsRaw
+    const rawParams = req.params as StringIdParams
     const params = getTestRegistrationParamsFromId(rawParams.id)
     const testRegistration = await testRegistrationsService.getTestRegistration(
       params
     )
+    return res.send(testRegistration)
+  }
+
+  updateTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
+    // TODO: ATUH
+    const rawParams = req.params as StringIdParams
+    const params = getTestRegistrationParamsFromId(rawParams.id)
+    const input = req.body as UpdateTestRegistrationInput
+    const testRegistration =
+      await testRegistrationsService.updateTestRegistration(params, input)
     return res.send(testRegistration)
   }
 }

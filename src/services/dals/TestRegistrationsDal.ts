@@ -10,7 +10,7 @@ class TestRegistrationsDal {
   }
 
   getTestRegistration = async (
-    params: GetTestRegistrationParams
+    params: TestRegistrationIdParams
   ): Promise<TestRegistration> => {
     return this.db('test_registrations').select().where(params).first() // return one
   }
@@ -43,6 +43,16 @@ class TestRegistrationsDal {
           throw e
         }
       })
+  }
+  updateTestRegistration = async (
+    params: TestRegistrationIdParams,
+    input: UpdateTestRegistrationInput
+  ) => {
+    return this.db('test_registrations')
+      .where(params)
+      .update({ ...input, updatedAt: new Date().toISOString() })
+      .returning('*')
+      .then((r: TestRegistration[]) => r[0]) // return one
   }
 }
 

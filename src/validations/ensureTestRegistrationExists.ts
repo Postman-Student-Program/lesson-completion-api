@@ -5,7 +5,7 @@ const { NotFoundError } = errors
 
 /** Returns a book if it exists, otherwise throws 404 */
 const ensureTestRegistrationExists = async (
-  params: GetTestRegistrationParams,
+  params: TestRegistrationIdParams,
   testRegistrationsDal: TestRegistrationsDal
 ): Promise<TestRegistration> => {
   const book = await testRegistrationsDal.getTestRegistration(params)

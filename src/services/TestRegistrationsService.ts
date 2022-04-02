@@ -28,13 +28,34 @@ class TestRegistrationsService {
   }
 
   getTestRegistration = async (
-    params: GetTestRegistrationParams
+    params: TestRegistrationIdParams
   ): Promise<TestRegistration> => {
     const testRegistration = await ensureTestRegistrationExists(
       params,
       this.testRegistrationsDal
     )
     return testRegistration
+  }
+
+  updateTestRegistration = async (
+    params: TestRegistrationIdParams,
+    input: UpdateTestRegistrationInput
+  ) => {
+    // TODO: AUTH
+    const testRegistration = await ensureTestRegistrationExists(
+      params,
+      this.testRegistrationsDal
+    )
+    const filteredInput = filterObj(input, [
+      'name',
+      'publishedCourseId',
+      'lessonId',
+      'postmanTestCollectionJsonUrl'
+    ])
+    return this.testRegistrationsDal.updateTestRegistration(
+      params,
+      filteredInput
+    )
   }
 }
 

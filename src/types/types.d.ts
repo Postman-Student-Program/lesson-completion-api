@@ -2,7 +2,7 @@ interface SkilljarDalConstructorArgs {
   apiKey: string
 }
 
-interface StringId {
+interface StringIdParams {
   id: string
 }
 
@@ -19,18 +19,14 @@ interface SubmitResponse {
   errors?: any[]
 }
 
-interface GetTestRegistrationParamsRaw {
-  id: string
-}
-
-interface GetTestRegistrationParams {
+interface TestRegistrationIdParams {
   publishedCourseId: string
   lessonId: string
 }
 
 interface GetTestRegistrationsParams {
   name?: string
-  publishedCourseId: string
+  publishedCourseId?: string
 }
 
 type GetTestRegistrationsResolvedParams =
@@ -51,6 +47,13 @@ interface CreateTestRegistrationInput {
   postmanTestCollectionJsonUrl: string
   publishedCourseId: string
   lessonId: string
+}
+
+interface UpdateTestRegistrationInput {
+  name?: string
+  postmanTestCollectionJsonUrl?: string
+  publishedCourseId?: string
+  lessonId?: string
 }
 interface TestCollectionArgs {
   testCollectionUrl: string
