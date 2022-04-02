@@ -46,8 +46,6 @@ class SubmitService {
       lessonId
     })
 
-    // console.log({ registeredTest })
-
     /** If a Postman test is registered for this course + lesson, make sure the submission passes the tests */
     if (registeredTest) {
       const testResults = await testCollection({
