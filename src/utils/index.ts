@@ -1,5 +1,4 @@
-const b64 = (str: string): string => {
-  return Buffer.from(str).toString('base64')
-}
+import b64 from './b64'
+import rmNewLines from './rmNewLines'
 
-export { b64 }
+export { b64, rmNewLines }

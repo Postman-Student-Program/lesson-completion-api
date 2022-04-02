@@ -75,6 +75,12 @@ paths:
           required: false
           schema:
             type: string
+        - name: publishedCourseId
+          in: query
+          description: 'a search term to match publishedCourseId'
+          required: false
+          schema:
+            type: string
       responses:
         '200':
           description: 'Success'
@@ -313,11 +319,12 @@ components:
     TestRegistration:
       type: object
       required:
-        - id
         - postmanTestCollectionJsonUrl
         - createdAt
       properties:
-        id:
+        publishedCourseId:
+          type: string
+        lessonId:
           type: string
         postmanTestCollectionJsonUrl:
           type: string

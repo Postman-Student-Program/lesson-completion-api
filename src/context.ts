@@ -4,6 +4,7 @@ import config from './config'
 import TestRegistrationsDal from './services/dals/TestRegistrationsDal'
 import knex from './db/knex'
 import PostmanDal from './services/dals/PostmanDal'
+import TestRegistrationsService from './services/TestRegistrationsService'
 
 // Build Dals
 const skilljarDal = new SkilljarDal({ apiKey: config.skilljarApiKey })
@@ -23,8 +24,13 @@ const submitService = new SubmitService(
   postmanDal
 )
 
+const testRegistrationsService = new TestRegistrationsService(
+  testRegistrationsDal
+)
+
 const services = {
-  submitService
+  submitService,
+  testRegistrationsService
 }
 
 const context = { dals, services }

@@ -6,8 +6,18 @@ class TestRegistrationsService {
     this.testRegistrationsDal = testRegistrationsDal
   }
 
-  getTestRegistration() {
-    //TODO
+  getTestRegistrations = async ({
+    name,
+    publishedCourseId
+  }: GetTestRegistrationsParams): Promise<TestRegistration[]> => {
+    /** 'name' takes precendence over 'publishedCourseId' */
+    let resolvedParams: GetTestRegistrationsResolvedParams = {}
+    if (name) {
+      resolvedParams = { name }
+    } else if (publishedCourseId) {
+      resolvedParams = { publishedCourseId }
+    }
+    return this.testRegistrationsDal.getTestRegistrations(resolvedParams)
   }
 }
 

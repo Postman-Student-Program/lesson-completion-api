@@ -20,6 +20,15 @@ interface GetTestRegistrationParams {
   lessonId: string
 }
 
+interface GetTestRegistrationsParams {
+  name?: string
+  publishedCourseId: string
+}
+
+type GetTestRegistrationsResolvedParams =
+  | { name: string }
+  | { publishedCourseId: string }
+  | {}
 interface TestRegistration {
   publishedCourseId: string
   lessonId: string
