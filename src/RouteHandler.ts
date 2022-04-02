@@ -13,8 +13,10 @@ class RouteHandler {
     return res.send({ message: 'ok' })
   }
   submit = async (req: FastifyRequest, res: FastifyReply) => {
-    const resp = await submitService.submit(req.body as SubmitServiceInput)
-    return res.send({ status: resp.status })
+    const { status, message } = await submitService.submit(
+      req.body as SubmitServiceInput
+    )
+    return res.send({ status, message })
   }
 }
 

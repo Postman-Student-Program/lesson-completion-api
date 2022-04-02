@@ -34,6 +34,22 @@ class SkilljarDal {
       throw e
     }
   }
+
+  completeLesson = async ({
+    userId,
+    publishedCourseId,
+    lessonId
+  }: SkilljarDalCompleteLessonArgs): Promise<SkilljarDalCompleteLessonRepsonse> => {
+    const path = `/users/${userId}/published-courses/${publishedCourseId}/lessons/${lessonId}`
+    const now = new Date().toISOString()
+    const payload = {
+      lesson_progress: {
+        completed_at: now
+      }
+    }
+    const res = await this.sjApi.patch(path, payload)
+    return res.data
+  }
 }
 
 export default SkilljarDal

@@ -14,36 +14,48 @@ class CustomError extends Error {
 // -------- Custom errors --------/
 
 class UnauthorizedError extends CustomError {
-  status
+  statusCode
   constructor(msg?: string) {
     const defaultMsg = `Invalid or missing credentials.`
     super(msg || defaultMsg)
-    this.status = 401
+    this.statusCode = 401
   }
 }
 
 class NotFoundError extends CustomError {
-  status
+  statusCode
   constructor(msg?: string) {
     const defaultMsg = `Not found`
     super(msg || defaultMsg)
-    this.status = 404
+    this.statusCode = 404
   }
 }
 
 class InternalError extends CustomError {
-  status
+  statusCode
   constructor(msg?: string) {
     const defaultMsg = `Internal error... something went wrong`
     super(msg || defaultMsg)
-    this.status = 500
+    this.statusCode = 500
+  }
+}
+
+class PostmanTestsFailedError extends CustomError {
+  statusCode
+  errors
+  constructor(errors: TestFailure[]) {
+    const defaultMsg = `Your collection failed one or more Postman tests. See the errors array for details.`
+    super(defaultMsg)
+    this.statusCode = 424
+    this.errors = errors
   }
 }
 
 const errors = {
   UnauthorizedError,
   NotFoundError,
-  InternalError
+  InternalError,
+  PostmanTestsFailedError
 }
 
 export default errors

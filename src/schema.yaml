@@ -266,60 +266,60 @@ components:
       type: object
       required:
         - email
-        - postman_collection_json_url
-        - published_course_id
-        - lesson_id
+        - postmanCollectionJsonUrl
+        - publishedCourseId
+        - lessonId
       properties:
         email:
           type: string
-        postman_collection_json_url:
+        postmanCollectionJsonUrl:
           type: string
-        published_course_id:
+        publishedCourseId:
           type: string
-        lesson_id:
+        lessonId:
           type: string
     CreateTestRegistrationInput:
       type: object
       required:
         - name
-        - postman_test_collection_json_url
-        - published_course_id
-        - lesson_id
+        - postmanTestCollectionJsonUrl
+        - publishedCourseId
+        - lessonId
       properties:
         name:
           type: string
-        postman_test_collection_json_url:
+        postmanTestCollectionJsonUrl:
           type: string
-        published_course_id:
+        publishedCourseId:
           type: string
-        lesson_id:
+        lessonId:
           type: string
     UpdateTestRegistrationInput:
       type: object
       anyOf:
         - required: [name]
-        - required: [postman_test_collection_json_url]
-        - required: [published_course_id]
-        - required: [lesson_id]
+        - required: [postmanTestCollectionJsonUrl]
+        - required: [publishedCourseId]
+        - required: [lessonId]
       properties:
         name:
           type: string
-        postman_test_collection_json_url:
+        postmanTestCollectionJsonUrl:
           type: string
-        published_course_id:
+        publishedCourseId:
           type: string
-        lesson_id:
+        lessonId:
           type: string
     TestRegistration:
       type: object
       required:
         - id
-        - postman_test_collection_json_url
+        - postmanTestCollectionJsonUrl
         - createdAt
       properties:
         id:
           type: string
-        postman_test_collection_json_url:
+        postmanTestCollectionJsonUrl:
           type: string
         name:
           type: string
@@ -329,28 +329,37 @@ components:
       type: object
       required:
         - status
-
+        - message
       properties:
         status:
           type: string
           enum: [ok]
+        message:
+          type: string
     ErroredSubmission:
       type: object
       required:
         - status
         - errors
+        - message
       properties:
         status:
           type: string
           enum: [error]
+        message:
+          type: string
         errors:
           type: array
           items: {} # any type.
     Error:
       type: object
       required:
+        - status
         - message
       properties:
+        status:
+          type: string
+          enum: [error]
         message:
           type: string
         errors:

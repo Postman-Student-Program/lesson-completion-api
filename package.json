@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "yarn clean && tsc -p tsconfig.build.json && yarn copy-spec",
+    "build": "npm run clean && tsc -p tsconfig.build.json && npm run copy-files",
     "start": "node dist/server.js",
     "dev": "nodemon",
     "clean": "rm -fr dist",
+    "copy-files": "cp src/schema.yaml dist/schema.yaml && cp .env dist/.env",
     "test": "npm run db:test:pristine && NODE_ENV=test jest",
     "test:watch": "npm run db:test:pristine && NODE_ENV=test jest --watch",
     "psql": "psql -U lesson_comp_dev lesson_comp_api_dev",
-    "db:init": "psql postgres -f ./src/db/sql/init.sql"
+    "db:init": "psql postgres -f ./src/db/sql/init.sql",
+    "db:migrate:make": "knex --knexfile ./src/db/knexfile.ts migrate:make",
+    "db:dev:reset": "NODE_ENV=development ts-node ./src/db/helpers/resetDb.ts",
+    "db:dev:latest": "NODE_ENV=development knex --knexfile ./src/db/knexfile.ts migrate:latest",
+    "db:dev:seed": "NODE_ENV=development knex --knexfile ./src/db/knexfile.ts seed:run",
+    "db:dev:pristine": "npm run db:dev:reset && npm run db:dev:latest && npm run db:dev:seed"
   },
   "keywords": [],
   "author": "claire.froelich@postman.com",
@@ -22,12 +28,14 @@
     "fastify": "^3.27.4",
     "fastify-openapi-glue": "^2.6.6",
     "knex": "^1.0.4",
+    "newman": "^5.3.2",
     "pg": "^8.7.3"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/jest": "^27.4.1",
     "@types/knex": "^0.16.1",
+    "@types/newman": "^5.3.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.6.1",
     "ts-jest": "^27.1.4",
