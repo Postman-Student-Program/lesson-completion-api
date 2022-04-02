@@ -1,3 +1,4 @@
+import { filterObj } from '../utils'
 import TestRegistrationsDal from './dals/TestRegistrationsDal'
 
 class TestRegistrationsService {
@@ -6,18 +7,23 @@ class TestRegistrationsService {
     this.testRegistrationsDal = testRegistrationsDal
   }
 
-  getTestRegistrations = async ({
-    name,
-    publishedCourseId
-  }: GetTestRegistrationsParams): Promise<TestRegistration[]> => {
-    /** 'name' takes precendence over 'publishedCourseId' */
-    let resolvedParams: GetTestRegistrationsResolvedParams = {}
-    if (name) {
-      resolvedParams = { name }
-    } else if (publishedCourseId) {
-      resolvedParams = { publishedCourseId }
-    }
-    return this.testRegistrationsDal.getTestRegistrations(resolvedParams)
+  getTestRegistrations = async (
+    params: GetTestRegistrationsParams
+  ): Promise<TestRegistration[]> => {
+    return this.testRegistrationsDal.getTestRegistrations(params)
+  }
+
+  createTestRegistration = async (
+    input: CreateTestRegistrationInput
+  ): Promise<TestRegistration> => {
+    const filteredInput = filterObj(input, [
+      'name',
+      'publishedCourseId',
+      'lessonId',
+      'postmanTestCollectionJsonUrl'
+    ])
+
+    return this.testRegistrationsDal.createTestRegistration(filteredInput)
   }
 }
 

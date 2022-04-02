@@ -21,12 +21,21 @@ class RouteHandler {
 
   /** Below are admin only */
   getTestRegistrations = async (req: FastifyRequest, res: FastifyReply) => {
+    // TODO: AUTH
     const testRegistrations =
       await testRegistrationsService.getTestRegistrations(
         req.query as GetTestRegistrationsParams
       )
-    console.log({ testRegistrations })
     return res.send(testRegistrations)
+  }
+
+  createTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
+    // TODO: AUTH
+    const newTestRegistration =
+      await testRegistrationsService.createTestRegistration(
+        req.body as CreateTestRegistrationInput
+      )
+    return res.status(201).send(newTestRegistration)
   }
 }
 

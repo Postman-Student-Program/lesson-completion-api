@@ -38,6 +38,12 @@ interface TestRegistration {
   createdAt: string
 }
 
+interface CreateTestRegistrationInput {
+  name: string
+  postmanTestCollectionJsonUrl: string
+  publishedCourseId: string
+  lessonId: string
+}
 interface TestCollectionArgs {
   testCollectionUrl: string
   submissionCollectionUrl: string

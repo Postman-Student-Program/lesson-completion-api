@@ -51,11 +51,21 @@ class PostmanTestsFailedError extends CustomError {
   }
 }
 
+class UniqueKeyViolationError extends CustomError {
+  statusCode
+  constructor(msg?: string) {
+    const defaultMsg = `Violates unique key constraint.`
+    super(msg || defaultMsg)
+    this.statusCode = 409
+  }
+}
+
 const errors = {
   UnauthorizedError,
   NotFoundError,
   InternalError,
-  PostmanTestsFailedError
+  PostmanTestsFailedError,
+  UniqueKeyViolationError
 }
 
 export default errors

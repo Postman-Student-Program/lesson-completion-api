@@ -102,12 +102,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        '404':
-          description: 'Test registration not found'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
         default:
           description: 'Unexpected error'
           content:
@@ -137,6 +131,12 @@ paths:
                 $ref: '#/components/schemas/TestRegistration'
         '400':
           description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: 'Duplicate entity'
           content:
             application/json:
               schema:
@@ -329,6 +329,8 @@ components:
         postmanTestCollectionJsonUrl:
           type: string
         name:
+          type: string
+        updatedAt:
           type: string
         createdAt:
           type: string
