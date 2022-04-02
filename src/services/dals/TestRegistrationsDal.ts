@@ -24,6 +24,7 @@ class TestRegistrationsDal {
     ${buildGetRegistrationsAndWhere(params as GetTestRegistrationsParams)}
     ORDER BY "createdAt" DESC;
     `)
+
     return this.db.raw(query).then((r: any) => r.rows)
   }
 
