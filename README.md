@@ -58,3 +58,7 @@ Tests will be ignored in the build, so you can put them anywhere with extension 
 Run `npm test` to start test runner. Note that the test database is destoryed and re-migrated and seeded each run of `npm test`.
 
 Run `npm test:watch` to run tests and continually test as code is updated.
+
+## Env vars and schema
+
+`.env` and `schema.yaml` need to be copied to dist folder. If you update .env or schema in prod, be sure to run `npm run build` again. This will copy over the .env files

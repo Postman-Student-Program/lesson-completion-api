@@ -2,6 +2,7 @@ import { FastifyRequest, FastifyReply } from 'fastify'
 
 import context from './context'
 import { getTestRegistrationParamsFromId } from './utils'
+import requireApiKey from './validations/requireApiKey'
 
 const { submitService, testRegistrationsService } = context.services
 
@@ -22,7 +23,7 @@ class RouteHandler {
 
   /** Below are admin only */
   getTestRegistrations = async (req: FastifyRequest, res: FastifyReply) => {
-    // TODO: AUTH
+    requireApiKey(req)
     const testRegistrations =
       await testRegistrationsService.getTestRegistrations(
         req.query as GetTestRegistrationsParams
@@ -31,7 +32,7 @@ class RouteHandler {
   }
 
   createTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
-    // TODO: AUTH
+    requireApiKey(req)
     const newTestRegistration =
       await testRegistrationsService.createTestRegistration(
         req.body as CreateTestRegistrationInput
@@ -40,7 +41,7 @@ class RouteHandler {
   }
 
   getTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
-    // TODO: AUTH
+    requireApiKey(req)
     const rawParams = req.params as StringIdParams
     const params = getTestRegistrationParamsFromId(rawParams.id)
     const testRegistration = await testRegistrationsService.getTestRegistration(
@@ -50,7 +51,7 @@ class RouteHandler {
   }
 
   updateTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
-    // TODO: AUTH
+    requireApiKey(req)
     const rawParams = req.params as StringIdParams
     const params = getTestRegistrationParamsFromId(rawParams.id)
     const input = req.body as UpdateTestRegistrationInput
@@ -60,7 +61,7 @@ class RouteHandler {
   }
 
   deleteTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
-    // TODO: AUTH
+    requireApiKey(req)
     const rawParams = req.params as StringIdParams
     const params = getTestRegistrationParamsFromId(rawParams.id)
     await testRegistrationsService.deleteTestRegistration(params)
