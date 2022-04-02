@@ -1,6 +1,7 @@
 import { FastifyRequest, FastifyReply } from 'fastify'
 
 import context from './context'
+import { getTestRegistrationParamsFromId } from './utils'
 
 const { submitService, testRegistrationsService } = context.services
 
@@ -36,6 +37,16 @@ class RouteHandler {
         req.body as CreateTestRegistrationInput
       )
     return res.status(201).send(newTestRegistration)
+  }
+
+  getTestRegistration = async (req: FastifyRequest, res: FastifyReply) => {
+    // TODO: AUTH
+    const rawParams = req.params as GetTestRegistrationParamsRaw
+    const params = getTestRegistrationParamsFromId(rawParams.id)
+    const testRegistration = await testRegistrationsService.getTestRegistration(
+      params
+    )
+    return res.send(testRegistration)
   }
 }
 

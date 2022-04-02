@@ -11,7 +11,7 @@ export const testCollection = async ({
         collection: testCollectionUrl, // the url of the Postman collection that contains the server-side tests
         envVar: [
           {
-            key: 'COLLECTION_JSON_URL',
+            key: config.submissionUrlEnvVarName,
             value: submissionCollectionUrl
           }
         ] as any

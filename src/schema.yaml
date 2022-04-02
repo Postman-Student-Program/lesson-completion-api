@@ -156,7 +156,7 @@ paths:
   /admin/test_registrations/{id}:
     get:
       summary: 'Update a test registration'
-      operationId: updateTestRegistration
+      operationId: getTestRegistration
       security:
         - ApiKeyAuth: []
       parameters:
@@ -267,6 +267,7 @@ components:
       required: true
       schema:
         type: string
+        pattern: '^\S+:\S+$'
   schemas:
     SubmitInput:
       type: object

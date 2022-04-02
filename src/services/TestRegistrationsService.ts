@@ -1,4 +1,5 @@
 import { filterObj } from '../utils'
+import ensureTestRegistrationExists from '../validations/ensureTestRegistrationExists'
 import TestRegistrationsDal from './dals/TestRegistrationsDal'
 
 class TestRegistrationsService {
@@ -24,6 +25,16 @@ class TestRegistrationsService {
     ])
 
     return this.testRegistrationsDal.createTestRegistration(filteredInput)
+  }
+
+  getTestRegistration = async (
+    params: GetTestRegistrationParams
+  ): Promise<TestRegistration> => {
+    const testRegistration = await ensureTestRegistrationExists(
+      params,
+      this.testRegistrationsDal
+    )
+    return testRegistration
   }
 }
 

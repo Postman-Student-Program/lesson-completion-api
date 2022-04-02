@@ -2,6 +2,10 @@ interface SkilljarDalConstructorArgs {
   apiKey: string
 }
 
+interface StringId {
+  id: string
+}
+
 interface SubmitServiceInput {
   email: string
   postmanCollectionJsonUrl: string
@@ -13,6 +17,10 @@ interface SubmitResponse {
   status: string
   message: string
   errors?: any[]
+}
+
+interface GetTestRegistrationParamsRaw {
+  id: string
 }
 
 interface GetTestRegistrationParams {
