@@ -17,7 +17,9 @@
     "db:dev:reset": "NODE_ENV=development ts-node ./src/db/helpers/resetDb.ts",
     "db:dev:latest": "NODE_ENV=development knex --knexfile ./src/db/knexfile.ts migrate:latest",
     "db:dev:seed": "NODE_ENV=development knex --knexfile ./src/db/knexfile.ts seed:run",
-    "db:dev:pristine": "npm run db:dev:reset && npm run db:dev:latest && npm run db:dev:seed"
+    "db:dev:pristine": "npm run db:dev:reset && npm run db:dev:latest && npm run db:dev:seed",
+    "db:prod:latest": "NODE_ENV=production knex --knexfile ./src/db/knexfile.ts migrate:latest",
+    "db:prod:seed": "NODE_ENV=production knex --knexfile ./src/db/knexfile.ts seed:run"
   },
   "keywords": [],
   "author": "claire.froelich@postman.com",
