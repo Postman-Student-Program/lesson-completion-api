@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.build.json && npm run copy-files",
-    "start": "node dist/server.js",
+    "start": "npm run build && node dist/server.js",
     "dev": "nodemon",
     "clean": "rm -fr dist",
     "copy-files": "cp src/schema.yaml dist/schema.yaml && cp .env dist/.env",
