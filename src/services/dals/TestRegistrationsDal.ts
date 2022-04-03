@@ -36,6 +36,7 @@ class TestRegistrationsDal {
       .returning('*')
       .then((r: TestRegistration[]) => r[0]) // return one
       .catch((e: any) => {
+        /** Throw special error for unique key constraint violation */
         if (e.code === '23505' /* unique key constraint error code */) {
           const msg = `Test registration already exists for { publishedCourseId: '${input.publishedCourseId}', lessonId: '${input.lessonId}' }. Please either edit the existing record, or delete it and create a new one.`
           throw new UniqueKeyViolationError(msg)
