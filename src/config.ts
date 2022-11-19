@@ -41,6 +41,7 @@ const config: { [key: string]: string } = {
   submissionUrlEnvVarName: 'COLLECTION_JSON_URL',
   apiKeyKey: 'apikey',
   apiKeyVal: process.env.API_KEY_VAL || '',
+  pmApiKey: process.env.PM_API_KEY as string,
   /** Production database URL */
   prodDatabaseUrl: process.env.PROD_DATABASE_URL as string, // listed as required above to ensure string exists
   skilljarApiKey: process.env.SKILLJAR_API_KEY as string, // listed as requiredForProd above to ensure string exists

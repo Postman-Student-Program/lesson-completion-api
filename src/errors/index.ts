@@ -60,12 +60,32 @@ class UniqueKeyViolationError extends CustomError {
   }
 }
 
+class TooManyRequestsError extends CustomError {
+  statusCode
+  constructor(msg?: string) {
+    const defaultMsg = `This API is taking in too many requests at the moment. Please try again in five minutes`
+    super(msg || defaultMsg)
+    this.statusCode = 429
+  }
+}
+
+class MissingCollectionIdOrUrlError extends CustomError {
+  statusCode
+  constructor(msg?: string) {
+    const defaultMsg = `Must include one of these properties in the request body: 'collectionId' or 'postmanCollectionJsonUrl'. Note that your collection must be in a public workspace to use 'collectionId'.`
+    super(msg || defaultMsg)
+    this.statusCode = 400
+  }
+}
+
 const errors = {
   UnauthorizedError,
   NotFoundError,
   InternalError,
   PostmanTestsFailedError,
-  UniqueKeyViolationError
+  UniqueKeyViolationError,
+  MissingCollectionIdOrUrlError,
+  TooManyRequestsError
 }
 
 export default errors

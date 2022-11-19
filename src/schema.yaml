@@ -48,6 +48,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+        '429':
+          description: 'Too Many Requests'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
         '424':
           description: 'Postman tests failed'
           content:
@@ -273,13 +279,14 @@ components:
       type: object
       required:
         - email
-        - postmanCollectionJsonUrl
         - publishedCourseId
         - lessonId
       properties:
         email:
           type: string
         postmanCollectionJsonUrl:
+          type: string
+        collectionId:
           type: string
         publishedCourseId:
           type: string
@@ -379,4 +386,4 @@ components:
     ApiKeyAuth:
       type: apiKey
       in: header
-      name: api-key
+      name: apikey

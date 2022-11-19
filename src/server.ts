@@ -22,6 +22,7 @@ fastify.setErrorHandler(function (
   _req: FastifyRequest,
   res: FastifyReply
 ) {
+  console.log({ err })
   err.status = 'error'
   if (err.validation && err.validation.length) {
     err.errors = err.validation

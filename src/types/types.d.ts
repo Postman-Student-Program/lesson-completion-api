@@ -9,6 +9,7 @@ interface StringIdParams {
 interface SubmitServiceInput {
   email: string
   postmanCollectionJsonUrl: string
+  collectionId: string
   publishedCourseId: string
   lessonId: string
 }
