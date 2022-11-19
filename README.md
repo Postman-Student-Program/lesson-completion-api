@@ -19,7 +19,7 @@ Run
 `npm run db:dev:pristine`
 
 This will create `lesson_comp_api_test` and `lesson_comp_api_dev` databases with a user named
-`lesson_comp_dev`, then migrate & seed them with initial books.
+`lesson_comp_dev`
 
 #### Run migrations
 
@@ -28,6 +28,21 @@ When you initialized the database you ran `npm run db:dev:pristine`, which ran t
 If you need to update migrations later:
 
 `npm run db:dev:latest`
+
+#### Run postgres server
+
+Postgres must be installed
+
+check postgres status (Mac)
+`pg_ctl -D /usr/local/var/postgres status`
+
+If you get an error about postmaster.pid:
+
+`rm /usr/local/var/postgres/postmaster.pid`
+
+Then restart postgres (Mac)
+
+`brew services restart postgresql`
 
 #### Inspecting database
 
