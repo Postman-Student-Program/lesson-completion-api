@@ -4,7 +4,7 @@ import path from 'path'
 dotenv.config({ path: path.resolve(__dirname, '../', '.env') })
 
 /** List any required env vars here */
-const required: string[] = ['SKILLJAR_API_KEY', 'API_KEY_VAL']
+const required: string[] = ['SKILLJAR_API_KEY', 'API_KEY_VAL', 'PM_API_KEY']
 const requiredForProd: string[] = ['PROD_DATABASE_URL']
 
 const validateEnvVars = () => {
