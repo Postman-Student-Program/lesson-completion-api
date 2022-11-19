@@ -77,3 +77,10 @@ Run `npm test:watch` to run tests and continually test as code is updated.
 ## Env vars and schema
 
 `.env` and `schema.yaml` need to be copied to dist folder. If you update .env or schema in prod, be sure to run `npm run build` again. This will copy over the .env files
+
+## Updating production server
+
+- SSH into server (need to update EC2 instance security rules to allow your IP)
+- `cd` into the lesson api dir
+- Pull latest changes: `git pull origin main`
+- Reload pm2: `pm2 reload ecosystem.config.js --env production`
