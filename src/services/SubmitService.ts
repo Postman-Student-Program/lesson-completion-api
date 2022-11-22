@@ -56,8 +56,6 @@ class SubmitService {
       const collectionUrlStatusCode = await getCollectionUrlStatusCode(
         submissionUrl
       )
-      console.log({ collectionUrlStatusCode })
-      console.log({ submissionUrl })
       if (collectionUrlStatusCode < 200 || collectionUrlStatusCode > 299) {
         if (collectionUrlStatusCode === 429) {
           throw new TooManyRequestsError()
