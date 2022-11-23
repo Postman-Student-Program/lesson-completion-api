@@ -80,7 +80,12 @@ Run `npm test:watch` to run tests and continually test as code is updated.
 
 ## Updating production server
 
-- SSH into server (need to update EC2 instance security rules to allow your IP)
+- SSH into server (In AWS, need to update EC2 instance security rules to allow your IP to access port 22 on lesson completion api. syntax for you IP addess: `<your public ip address>/32`)
 - `cd` into the lesson api dir
 - Pull latest changes: `git pull origin main`
-- Reload pm2: `pm2 reload ecosystem.config.js --env production`
+- Reload pm2: `pm2 reload ecosystem.config.js --env production`. This runs the app on port 3000 (or port specified in .env)
+- Check nginx status: `systemctl status nginx`
+- If nginx is not running, start it with: `systemctl start nginx`
+- Remove the SSH (port 22) rule from ec2 instance
+
+IMPORTANT: If the ec2 instance is rebooted, the instance public IP address might change. If it changes, you will need to update the resource endpoints in AWS API Gateway, and redeploy the API, otherwise `504` errors will be returned.
